@@ -41,7 +41,8 @@ jobs:
         run: terraform plan -out=tfplan
 
 
-      - name: Terraform Apply Auto Deploy
+      - name: terraform apply tfplan --auto-approve
+
         run: |
          export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
           terraform apply --auto-approve
