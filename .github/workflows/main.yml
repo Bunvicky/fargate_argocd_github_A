@@ -40,9 +40,10 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
 
-      
-          export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
-          terraform apply --auto-approve 
+      - name: Terraform Apply Auto Deploy
+        run: |
+         export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
+          terraform apply --auto-approve
 
       # - name: Terraform Destroy Auto Deploy
       #   run: terraform destroy --auto-approve
