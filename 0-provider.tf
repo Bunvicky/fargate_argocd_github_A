@@ -1,10 +1,9 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
+# provider "aws" {
+#   region = "us-east-1"
+# }
 
 variable "cluster_name" {
-  default = "DemoSecOps-test"
+  default = "DemoSecOps"
 }
 
 variable "cluster_version" {
