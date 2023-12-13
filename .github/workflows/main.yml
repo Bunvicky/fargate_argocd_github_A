@@ -40,13 +40,12 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
 
-      # - name: Terraform Apply Auto Deploy
-      #   run: |
-      #     export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
-      #     terraform apply --auto-approve 
+      
+          export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
+          terraform apply --auto-approve 
 
-      - name: Terraform Destroy Auto Deploy
-        run: terraform destroy --auto-approve
+      # - name: Terraform Destroy Auto Deploy
+      #   run: terraform destroy --auto-approve
 
       - name: Slack Notification
         uses: act10ns/slack@v1
