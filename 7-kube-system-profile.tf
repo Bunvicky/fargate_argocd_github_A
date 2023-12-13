@@ -28,8 +28,8 @@ resource "aws_eks_fargate_profile" "kube-system" {
   # These subnets must have the following resource tag: 
   # kubernetes.io/cluster/<CLUSTER_NAME>.
   subnet_ids = [
-    aws_subnet.private-us-east-2a.id,
-    aws_subnet.private-us-east-2b.id
+    aws_subnet.private-us-east-1a.id,
+    aws_subnet.private-us-east-1b.id
   ]
 
   selector {
@@ -81,8 +81,8 @@ resource "aws_eks_fargate_profile" "staging" {
   # These subnets must have the following resource tag: 
   # kubernetes.io/cluster/<CLUSTER_NAME>.
   subnet_ids = [
-    aws_subnet.private-us-east-2a.id,
-    aws_subnet.private-us-east-2b.id
+    aws_subnet.private-us-east-1a.id,
+    aws_subnet.private-us-east-1b.id
   ]
 
   selector {
@@ -100,8 +100,8 @@ resource "aws_eks_fargate_profile" "argocd" {
   # These subnets must have the following resource tag: 
   # kubernetes.io/cluster/<CLUSTER_NAME>.
   subnet_ids = [
-    aws_subnet.private-us-east-2a.id,
-    aws_subnet.private-us-east-2b.id
+    aws_subnet.private-us-east-1a.id,
+    aws_subnet.private-us-east-1b.id
   ]
 
   selector {

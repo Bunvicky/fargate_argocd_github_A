@@ -3,7 +3,7 @@ terraform {
 
     bucket = "backend225531074886bucket"
     key    = "devops/terraform.tfstate"
-    region = "us-east-2"
+    region = "us-east-1"
 
   }
 }
