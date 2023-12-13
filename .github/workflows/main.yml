@@ -1,65 +1,59 @@
----
-  name: Using Terraform to Deploy Resource to AWS
-  on:
-    push:
-      branches: [ main ]
-    
-    pull_request:
-      branches: [ main ]
-  
-  jobs:
-    build-and-push:
-      name: Deploy to AWS
-      runs-on: ubuntu-latest
-  
-      env:
-        # SANDBOX_CLIENT_SECRET: ${{ secret.SANDBOX_CLIENT_SECRET }}
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  
-  
-      steps:
-      - name: Checkout
+name: Using Terraform to Deploy Resource to AWS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    name: Deploy to AWS
+    runs-on: ubuntu-latest
+
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - name: Checkout code
         uses: actions/checkout@v2
-  
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.region }}
-      
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.4.6
-  
+
       - name: Terraform Init
         run: terraform init
-  
-      # - name: Terraform Format
-      #   run: terraform fmt -check
-  
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive path/to/terraform/files/*
+
       - name: Terraform Validate
-        run: terraform validate 
-  
+        run: terraform validate
+
       - name: Terraform Plan
         run: terraform plan -input=false
-  
-  
+
       # - name: Terraform Apply Auto Deploy
       #   run: |
-      #       export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
-      #       terraform apply --auto-approve 
+      #     export KUBERNETES_MASTER=${{ env.KUBERNETES_MASTER }}
+      #     terraform apply --auto-approve 
+
       - name: Terraform Destroy Auto Deploy
         run: terraform destroy --auto-approve
-  
+
       - name: Slack Notification
         uses: act10ns/slack@v1
         with:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
           channel: '#cicd_notification'
-        if: always() 
-  
-      
-  
+        if: always()
