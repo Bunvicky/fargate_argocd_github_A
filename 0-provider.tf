@@ -3,7 +3,7 @@
 # }
 
 variable "cluster_name" {
-  default = "SecOps-test"
+  default = "DemoSecOps-test"
 }
 
 variable "cluster_version" {
