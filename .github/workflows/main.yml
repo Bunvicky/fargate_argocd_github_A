@@ -48,8 +48,8 @@ jobs:
          
           
 
-      # - name: Terraform Destroy Auto Deploy
-      #   run: terraform destroy --auto-approve
+      - name: Terraform Destroy Auto Deploy
+        run: terraform destroy --auto-approve
 
       - name: Slack Notification
         uses: act10ns/slack@v1

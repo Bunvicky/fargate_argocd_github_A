@@ -11,6 +11,10 @@ kubectl patch deployment coredns -n kube-system --type json -p='[{"op": "remove"
 2) It's very helpful when you need to debug Kubernetes issues.
 
 
-aws eks describe-cluster --name SecOps-test --region us-east-2
+aws eks describe-cluster --name DemoSecOps --region us-east-1
+aws eks update-kubeconfig --name DemoSecOps --region us-east-1
 
 kubectl get events -w -n kube-system
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl patch svc argocd-server -n argocd -p '{"spec":{"type": "NodePort"}}'
