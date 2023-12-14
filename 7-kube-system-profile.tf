@@ -108,7 +108,7 @@ resource "aws_eks_fargate_profile" "argocd" {
     namespace = "argocd"
   }
 }
-resource "aws_eks_fargate_profile" "argocd" {
+resource "aws_eks_fargate_profile" "ingress-nginx" {
   cluster_name           = aws_eks_cluster.cluster.name
   fargate_profile_name   = "ingress-nginx"
   pod_execution_role_arn = aws_iam_role.eks-fargate-profile.arn
