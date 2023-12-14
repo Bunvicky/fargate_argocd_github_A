@@ -41,15 +41,15 @@ jobs:
         run: terraform plan -out=tfplan
 
 
-      - name: terraform apply 
-        run: terraform apply -auto-approve
+      # - name: terraform apply 
+      #   run: terraform apply -auto-approve
 
         
          
           
 
-      # - name: Terraform Destroy Auto Deploy
-      #   run: terraform destroy --auto-approve
+      - name: Terraform Destroy Auto Deploy
+        run: terraform destroy --auto-approve
 
       - name: Slack Notification
         uses: act10ns/slack@v1
